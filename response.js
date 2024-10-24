@@ -43,7 +43,7 @@ export default class Response {
         this.end();
     }
     JSON(obj, ETag = "", fromCache = false) {   // ok status with content
-        if (fromCache == false && this.HttpContext.path.isAPI && this.HttpContext.path.id == undefined) {
+        if (fromCache == false && this.HttpContext.isCacheable) {
             CachedRequestManager.add(this.HttpContext.req.url, obj.content, ETag);
         }
         if (ETag != "")

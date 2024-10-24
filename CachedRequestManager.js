@@ -10,7 +10,7 @@ export default class CachedRequestManager {
     static startCachedRequestsCleaner() {
         /* démarre le processus de nettoyage des caches périmées */
         setInterval(CachedRequestManager.flushExpired, requestCachesExpirationTime * 1000);
-        console.log(BgWhite + FgBlue, "[Periodic repositories data caches cleaning process started...]");
+        console.log(BgWhite + FgBlue, "[Periodic requests data caches cleaning process started...]");
     }
     static add(url, content, ETag = "") {
         /* mise en cache */
@@ -26,7 +26,7 @@ export default class CachedRequestManager {
                 ETag,
                 Expire_Time: utilities.nowInSeconds() + requestCachesExpirationTime
             });
-            console.log(BgWhite + FgBlue, `[Data of ${url} repository has been cached]`);
+            console.log(BgWhite + FgBlue, `[Data of ${url} request has been cached]`);
         }
     }
     static find(url) {
@@ -43,7 +43,7 @@ export default class CachedRequestManager {
                 }
             }
         } catch (error) {
-            console.log(BgWhite + FgRed, "[repository cache error!]", error);
+            console.log(BgWhite + FgRed, "[request cache error!]", error);
         }
         return null;
     }
