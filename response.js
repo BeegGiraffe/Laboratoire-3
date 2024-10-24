@@ -36,15 +36,15 @@ export default class Response {
 
     /////////////////////////////////////////////// 200 ///////////////////////////////////////////////////////
 
-    ok() { return this.status(200); }       // ok status
+    ok() { return this.status(200); }           // ok status
     ETag(ETag) {
         console.log(FgCyan + Bright, "Response header ETag key:", ETag);
         this.res.writeHead(204, { 'ETag': ETag });
         this.end();
     }
-    JSON(obj, ETag = "", fromCache = false) {           // ok status with content
-        if (fromCache == false && this.HttpContext.req.path.isAPI && this.HttpContext.req.path.id == undefined) {
-            CachedRequestManager.add(this.HttpContext.req.path.url, obj.content , ETag);
+    JSON(obj, ETag = "", fromCache = false) {   // ok status with content
+        if (fromCache == false && this.HttpContext.path.isAPI && this.HttpContext.path.id == undefined) {
+            CachedRequestManager.add(this.HttpContext.req.url, obj.content, ETag);
         }
         if (ETag != "")
             this.res.writeHead(200, { 'content-type': 'application/json', 'ETag': ETag });
